@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -378,4 +377,315 @@
       position: absolute;
       inset: 0;
       background: #ffc1d0;
-      clip-path: polygon(0 0, 50% 57%, 100% 0, 100% 30%, 50
+      clip-path: polygon(0 0, 50% 57%, 100% 0, 100% 30%, 50% 82%, 0 30%);
+    }
+
+    .letter-subline {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    /* ---------- Letter Overlay (Popup) ---------- */
+
+    .letter-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      z-index: 40;
+    }
+
+    .letter-page {
+      background: #ffffff;
+      border-radius: 10px;
+      max-width: min(720px, 100%);
+      max-height: 92vh;
+      width: 100%;
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.6);
+      padding: 32px 40px 32px;
+      color: #23141d;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .letter-page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .letter-page-title {
+      font-size: 1.1rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #7a3344;
+    }
+
+    .letter-page-close {
+      border: none;
+      background: transparent;
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      color: #7a3344;
+    }
+
+    .letter-page-body {
+      font-size: 1.02rem;
+      line-height: 1.7;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .letter-page-body p + p {
+      margin-top: 14px;
+    }
+
+    .letter-page-sign {
+      margin-top: 22px;
+      font-weight: 500;
+    }
+
+    @media (max-width: 640px) {
+      .letter-page {
+        border-radius: 0;
+        max-height: 100vh;
+        padding: 22px 18px 26px;
+      }
+
+      .letter-page-header {
+        margin-bottom: 12px;
+      }
+
+      .letter-page-body {
+        font-size: 0.98rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="shell">
+      <header class="header">
+        <div class="header-title">Happy Valentine’s Day</div>
+        <div class="header-date">2026 – irgendwo zwischen dir und mir</div>
+      </header>
+
+      <section class="grid">
+        <!-- Hero -->
+        <article class="tile tile-hero">
+          <div>
+            <div class="tile-hero-main">
+              Auch mit Abstand bist du <em>mein</em> Lieblingsmensch.
+            </div>
+            <p class="tile-hero-sub">
+              Zwei Monate Long-Distance sind keine Ewigkeit, aber lang genug,
+              um zu merken, wie sehr du im Alltag fehlst.
+            </p>
+          </div>
+          <div class="tile-hero-foot">
+            wir &middot; heute &middot; nur anders
+          </div>
+        </article>
+
+        <!-- Countdown -->
+        <article class="tile tile-countdown">
+          <h2>Countdown</h2>
+          <div class="countdown-number" id="days">0</div>
+          <div class="countdown-label">Tage bis wir uns wiedersehen</div>
+        </article>
+
+        <!-- Hauptfoto -->
+        <article class="tile tile-photo-main">
+          <h2>Lieblingsmoment</h2>
+          <div class="photo-frame">
+            <!-- Bild ersetzen -->
+            <img src="photo-main.jpg" alt="Ein Foto von uns" />
+          </div>
+          <div class="photo-caption">
+            Ersetze dieses Bild mit einem Moment, der sich nach „wir“ anfühlt.
+          </div>
+        </article>
+
+        <!-- Seitenfoto -->
+        <article class="tile tile-photo-side">
+          <h2>Letztes Treffen</h2>
+          <div class="photo-frame">
+            <!-- Bild ersetzen -->
+            <img src="photo-side.jpg" alt="Unser letztes Treffen" />
+          </div>
+          <div class="photo-caption">
+            Das letzte Mal, bevor die Entfernung angefangen hat mitzuspielen.
+          </div>
+        </article>
+
+        <!-- Extra-Foto -->
+        <article class="tile tile-photo-extra">
+          <h2>Future Us</h2>
+          <div class="photo-frame">
+            <!-- Bild ersetzen -->
+            <img src="photo-future.jpg" alt="Ein Ort für uns" />
+          </div>
+          <div class="photo-caption">
+            Ein Ort, an dem wir zusammen stehen werden, wenn der Countdown auf 0 ist.
+          </div>
+        </article>
+
+        <!-- TODO-Liste -->
+        <article class="tile tile-todo">
+          <h2>Wenn wir uns wiedersehen</h2>
+          <ul class="todo-list" id="todoList">
+            <li class="todo-item">
+              <div class="todo-checkbox"><span></span></div>
+              <span>Frühstück, das viel zu lange dauert</span>
+            </li>
+            <li class="todo-item">
+              <div class="todo-checkbox"><span></span></div>
+              <span>Spaziergang ohne Zeitdruck</span>
+            </li>
+            <li class="todo-item">
+              <div class="todo-checkbox"><span></span></div>
+              <span>Filmabend, bei dem wir mehr reden als schauen</span>
+            </li>
+            <li class="todo-item">
+              <div class="todo-checkbox"><span></span></div>
+              <span>Einfach nebeneinander einschlafen</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Brief-Kachel -->
+        <article class="tile tile-letter" id="letterTile">
+          <div class="letter-top">
+            <div class="letter-title">Brief</div>
+            <div class="letter-action" id="letterOpenText">öffnen</div>
+          </div>
+
+          <div class="envelope-visual" id="envelopeVisual">
+            <!-- Wenn du lieber ein Bild nehmen willst:
+                 <img src="envelope.png" alt="Umschlag" style="width:100%;height:auto;border-radius:14px;" />
+            -->
+            <div class="envelope-icon"></div>
+          </div>
+
+          <div class="letter-subline">
+            Ein Umschlag für alles, was sich nicht in Nachrichten schicken lässt.
+          </div>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <!-- Popup-Brief -->
+  <div class="letter-overlay" id="letterOverlay" hidden>
+    <div class="letter-page" role="dialog" aria-modal="true" aria-labelledby="letterTitlePopup">
+      <div class="letter-page-header">
+        <div class="letter-page-title" id="letterTitlePopup">Ein Brief nur für dich</div>
+        <button class="letter-page-close" type="button" data-close-letter>&times;</button>
+      </div>
+      <div class="letter-page-body">
+        <p>
+          Hi du,
+        </p>
+        <p>
+          gerade sind wir nicht am selben Ort, aber du bist trotzdem
+          ständig in meinem Kopf. In Nachrichten, in Anrufen, in kleinen Momenten,
+          in denen ich denke: „Das würde ich dir jetzt gern direkt erzählen.“
+        </p>
+        <p>
+          Die Distanz macht manches komplizierter, aber sie ändert nichts daran,
+          wie wichtig du mir bist. Eher im Gegenteil: jeder Tag zeigt ein bisschen
+          mehr, wie sehr ich mich auf das freue, was wieder normal wird, wenn wir
+          am gleichen Ort sind.
+        </p>
+        <p>
+          Ich will wieder, dass „zusammen“ nicht bedeutet „gleicher Anruf“, sondern
+          „gleicher Raum“. Frühstück, das sich zieht. Abende, die länger werden,
+          als geplant. Und dieses Gefühl, dass man nichts Besonderes tun muss, damit
+          es sich besonders anfühlt.
+        </p>
+        <p>
+          Bis der Countdown bei null ist, machen wir eben das Beste aus zwei Orten.
+          Aber in meinem Kopf gibt es nur einen: da, wo du bist.
+        </p>
+        <p class="letter-page-sign">
+          &mdash; ich
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // -------- Countdown --------
+    const targetDate = new Date("2026-04-01T00:00:00"); // hier euer Wiedersehensdatum setzen
+
+    function updateCountdown() {
+      const now = new Date();
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const target = new Date(
+        targetDate.getFullYear(),
+        targetDate.getMonth(),
+        targetDate.getDate()
+      );
+
+      const diffMs = target - today;
+      const oneDayMs = 24 * 60 * 60 * 1000;
+      const days = Math.max(0, Math.ceil(diffMs / oneDayMs));
+
+      const daysEl = document.getElementById("days");
+      if (daysEl) daysEl.textContent = String(days);
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 24 * 60 * 60 * 1000);
+
+    // -------- TODO Interaction --------
+    const todoList = document.getElementById("todoList");
+    if (todoList) {
+      todoList.addEventListener("click", (e) => {
+        const item = e.target.closest(".todo-item");
+        if (!item) return;
+        item.classList.toggle("done");
+      });
+    }
+
+    // -------- Letter Overlay / Popup --------
+    const letterOverlay = document.getElementById("letterOverlay");
+    const envelopeVisual = document.getElementById("envelopeVisual");
+    const letterOpenText = document.getElementById("letterOpenText");
+
+    function openLetter() {
+      if (!letterOverlay) return;
+      letterOverlay.hidden = false;
+      document.body.classList.add("no-scroll");
+    }
+
+    function closeLetter() {
+      if (!letterOverlay) return;
+      letterOverlay.hidden = true;
+      document.body.classList.remove("no-scroll");
+    }
+
+    if (envelopeVisual) {
+      envelopeVisual.addEventListener("click", openLetter);
+    }
+    if (letterOpenText) {
+      letterOpenText.addEventListener("click", openLetter);
+    }
+    if (letterOverlay) {
+      letterOverlay.addEventListener("click", (e) => {
+        if (e.target === letterOverlay || e.target.closest("[data-close-letter]")) {
+          closeLetter();
+        }
+      });
+    }
+  </script>
+</body>
+</html>
+
