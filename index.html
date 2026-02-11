@@ -4,20 +4,18 @@
   <meta charset="UTF-8" />
   <title>Happy Valentines Day</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <style>
     :root {
-      --col-deep-red: #793444;
-      --col-soft-pink: #C572AA;
-      --col-deep-purple: #3D2C58;
-      --col-vivid-purple: #9839AC;
+      --bg: #3D2C58;
+      --accent: #9839AC;
+      --accent-soft: #C572AA;
+      --accent-dark: #793444;
 
-      --col-bg: #3D2C58;
-      --col-text: #FDF4FF;
-      --col-card: #432A60;
-      --col-surface: #352147;
-      --col-envelope-paper: #fdf7ef;
-      --col-envelope-shadow: #e0d5c5;
-      --col-letter-text: #2f2540;
+      --paper: #fdf6ec;
+      --paper-border: rgba(0, 0, 0, 0.18);
+      --text-light: #f7f3ff;
+      --text-dark: #2f2540;
     }
 
     * {
@@ -28,476 +26,252 @@
 
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background-color: var(--col-bg);
-      color: var(--col-text);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: stretch;
+      background-color: var(--bg);
+      color: var(--text-light);
     }
 
-    .page {
-      width: 100%;
-      max-width: 900px;
-      padding: 24px 16px 40px;
+    main {
+      max-width: 1100px;
       margin: 0 auto;
+      padding: 60px 16px 120px;
     }
 
-    @media (min-width: 768px) {
-      .page {
-        padding: 40px 24px 64px;
-      }
+    section {
+      margin: 100px 0;
     }
+
+    /* ---------- Banner ---------- */
 
     .hero {
-      background-color: var(--col-vivid-purple);
-      border-radius: 8px;
-      padding: 24px 20px;
       text-align: center;
-      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.45);
-      position: relative;
+      margin-bottom: 140px;
     }
 
     .hero h1 {
-      font-size: clamp(2.1rem, 4vw, 2.8rem);
-      letter-spacing: 0.04em;
+      font-size: clamp(2.6rem, 6vw, 4rem);
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin-bottom: 6px;
+      margin-bottom: 12px;
     }
 
-    .hero .subtitle {
-      font-size: 1rem;
-      max-width: 520px;
-      margin: 0 auto;
-      opacity: 0.95;
+    .hero p {
+      font-size: 1.1rem;
+      opacity: 0.9;
     }
 
-    .hero .tagline {
-      margin-top: 10px;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      opacity: 0.8;
-    }
+    /* ---------- Countdown ---------- */
 
-    .hero .accent-dot {
-      position: absolute;
-      width: 12px;
-      height: 12px;
-      border-radius: 999px;
-      background-color: var(--col-soft-pink);
-      top: 16px;
-      right: 16px;
-    }
-
-    .hero .accent-line {
-      position: absolute;
-      width: 46px;
-      height: 2px;
-      background-color: var(--col-soft-pink);
-      bottom: 18px;
-      left: 50%;
-      transform: translateX(-50%);
-      opacity: 0.8;
-    }
-
-    .countdown-section {
-      margin-top: 24px;
-      background-color: var(--col-surface);
-      border-radius: 8px;
-      padding: 18px 16px 20px;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+    .countdown {
       text-align: center;
     }
 
-    @media (min-width: 768px) {
-      .countdown-section {
-        padding: 22px 30px 24px;
-      }
-    }
-
-    .countdown-section h2 {
-      font-size: 1.15rem;
-      font-weight: 500;
-      margin-bottom: 10px;
-      opacity: 0.95;
-    }
-
-    .countdown {
-      display: flex;
-      justify-content: center;
-      margin-top: 4px;
-      margin-bottom: 8px;
-    }
-
-    .countdown-card {
-      background-color: var(--col-card);
-      border-radius: 8px;
-      padding: 16px 26px;
-      min-width: 130px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .countdown-card span:first-child {
-      font-size: clamp(2.3rem, 5vw, 2.9rem);
+    .countdown-number {
+      font-size: clamp(5.5rem, 14vw, 9.5rem);
       font-weight: 700;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
+      line-height: 1;
     }
 
-    .countdown-card .label {
-      margin-top: 4px;
-      font-size: 0.9rem;
+    .countdown-label {
+      margin-top: 14px;
+      font-size: 1.15rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
       opacity: 0.85;
     }
 
-    .countdown-caption {
-      font-size: 0.95rem;
-      opacity: 0.9;
-      margin-top: 4px;
-    }
+    /* ---------- Brief ---------- */
 
     .letter-section {
-      margin-top: 28px;
       text-align: center;
     }
 
     .letter-section h2 {
-      font-size: 1.35rem;
+      font-size: 1.6rem;
       font-weight: 500;
-      margin-bottom: 14px;
+      margin-bottom: 40px;
     }
 
     .envelope-wrapper {
       display: flex;
       justify-content: center;
-      margin-top: 6px;
-    }
-
-    .envelope-button {
-      border: none;
-      background: none;
-      padding: 0;
-      cursor: pointer;
-      outline: none;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .envelope-button:focus-visible .envelope-container {
-      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.6);
     }
 
     .envelope-container {
       position: relative;
-      width: min(420px, 90vw);
-      height: calc(min(420px, 90vw) * 0.75);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.2s ease-out;
-    }
-
-    .envelope-button:hover .envelope-container {
-      transform: translateY(-2px);
+      width: min(760px, 96vw);
+      height: 440px;
+      cursor: pointer;
     }
 
     .envelope {
-      position: relative;
-      width: 100%;
-      height: 100%;
+      position: absolute;
+      inset: 0;
     }
 
-    .envelope-body {
+    .envelope-base {
       position: absolute;
-      inset: 18% 6% 8%;
-      background-color: var(--col-envelope-paper);
-      border-radius: 4px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
-      overflow: hidden;
+      inset: 90px 0 0;
+      background: var(--paper);
+      border: 1px solid var(--paper-border);
     }
 
-    .envelope-bottom {
+    .envelope-left {
       position: absolute;
-      bottom: 8%;
-      left: 6%;
-      right: 6%;
-      height: 32%;
-      background-color: var(--col-envelope-paper);
-      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
-      clip-path: polygon(0 0, 50% 76%, 100% 0, 100% 100%, 0 100%);
-    }
-
-    .envelope-side-left {
-      position: absolute;
-      top: 18%;
-      bottom: 8%;
-      left: 6%;
-      width: 30%;
-      background-color: var(--col-envelope-paper);
+      left: 0;
+      bottom: 0;
+      width: 50%;
+      height: calc(100% - 90px);
+      background: var(--paper);
       clip-path: polygon(0 0, 100% 50%, 0 100%);
-      box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.05);
+      border-left: 1px solid var(--paper-border);
     }
 
-    .envelope-side-right {
+    .envelope-right {
       position: absolute;
-      top: 18%;
-      bottom: 8%;
-      right: 6%;
-      width: 30%;
-      background-color: var(--col-envelope-paper);
+      right: 0;
+      bottom: 0;
+      width: 50%;
+      height: calc(100% - 90px);
+      background: var(--paper);
       clip-path: polygon(100% 0, 0 50%, 100% 100%);
-      box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.05);
+      border-right: 1px solid var(--paper-border);
     }
 
     .envelope-flap {
       position: absolute;
-      top: 4%;
-      left: 6%;
-      right: 6%;
-      height: 40%;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 180px;
+      background: var(--paper);
+      clip-path: polygon(0 0, 50% 100%, 100% 0);
       transform-origin: top center;
-      transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-    }
-
-    .envelope-flap-shape {
-      position: absolute;
-      inset: 0;
-      background-color: var(--col-envelope-paper);
-      clip-path: polygon(0 0, 50% 80%, 100% 0, 100% 8%, 50% 88%, 0 8%);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
-    }
-
-    .envelope-seal {
-      position: absolute;
-      top: 68%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      background-color: var(--col-soft-pink);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    }
-
-    .envelope-seal::before {
-      content: "♥";
-      font-size: 0.9rem;
-      color: white;
-    }
-
-    .envelope-shadow {
-      position: absolute;
-      inset: auto 12% -6%;
-      height: 12px;
-      border-radius: 999px;
-      background-color: rgba(0, 0, 0, 0.5);
-      filter: blur(8px);
+      transition: transform 0.5s ease;
+      border-top: 1px solid var(--paper-border);
     }
 
     .letter {
       position: absolute;
       left: 50%;
-      bottom: 8%;
+      bottom: 20px;
       transform: translateX(-50%);
-      width: 88%;
-      height: 82%;
-      background-color: #ffffff;
-      border-radius: 6px;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-      padding: 18px 20px 20px;
-      overflow: hidden;
-      transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.45s ease-out;
-      transform-origin: bottom center;
-    }
-
-    .letter-content {
-      position: relative;
-      text-align: left;
-      color: var(--col-letter-text);
-      font-size: 1rem;
-      line-height: 1.6;
-      max-height: 100%;
-      overflow-y: auto;
-    }
-
-    .letter-content h3 {
+      width: 92%;
+      height: 86%;
+      background: white;
+      border: 1px solid var(--paper-border);
+      padding: 44px 56px;
+      color: var(--text-dark);
       font-size: 1.05rem;
-      margin-bottom: 10px;
-      color: var(--col-deep-purple);
-    }
-
-    .letter-content p + p {
-      margin-top: 10px;
-    }
-
-    .envelope-container:not(.open) .letter {
-      transform: translate(-50%, 38%);
+      line-height: 1.65;
       opacity: 0;
+      transition: transform 0.5s ease, opacity 0.4s ease;
+    }
+
+    .letter p + p {
+      margin-top: 16px;
     }
 
     .envelope-container.open .letter {
-      transform: translate(-50%, -4%);
+      transform: translateX(-50%) translateY(-160px);
       opacity: 1;
     }
 
     .envelope-container.open .envelope-flap {
-      transform: rotateX(165deg);
+      transform: rotateX(180deg);
     }
 
-    .tap-hint {
-      font-size: 0.9rem;
-      margin-top: 10px;
-      opacity: 0.85;
+    .hint {
+      margin-top: 24px;
+      font-size: 0.95rem;
+      opacity: 0.8;
     }
 
     @media (prefers-reduced-motion: reduce) {
       * {
-        scroll-behavior: auto !important;
-        animation: none !important;
         transition: none !important;
       }
     }
   </style>
 </head>
-<body>
-  <div class="page">
-    <header class="hero">
-      <div class="accent-dot"></div>
-      <div class="accent-line"></div>
-      <h1>Happy Valentine&apos;s Day</h1>
-      <p class="subtitle">
-        Auch wenn wir gerade nicht am selben Ort sind, gehört dieser Tag nur dir.
-      </p>
-      <p class="tagline">Distance im Alltag, nicht im Herzen.</p>
-    </header>
 
-    <section class="countdown-section">
-      <h2>Noch</h2>
-      <div class="countdown">
-        <div class="countdown-card">
-          <span id="days">0</span>
-          <span class="label">Tage</span>
-        </div>
-      </div>
-      <p class="countdown-caption">
-        bis wir uns wiedersehen.
+<body>
+  <main>
+    <section class="hero">
+      <h1>Happy Valentine’s Day</h1>
+      <p>
+        Auch wenn wir gerade nicht am selben Ort sind.
       </p>
+    </section>
+
+    <section class="countdown">
+      <div class="countdown-number" id="days">0</div>
+      <div class="countdown-label">
+        Tage bis wir uns wiedersehen
+      </div>
     </section>
 
     <section class="letter-section">
       <h2>Ein Brief nur für dich</h2>
+
       <div class="envelope-wrapper">
-        <button
-          class="envelope-button"
-          id="envelopeButton"
-          type="button"
-          aria-label="Brief öffnen"
-          aria-expanded="false"
-        >
-          <div class="envelope-container" id="envelopeContainer">
-            <div class="envelope">
-              <div class="envelope-body"></div>
-              <div class="envelope-side-left"></div>
-              <div class="envelope-side-right"></div>
-              <div class="envelope-bottom"></div>
+        <div class="envelope-container" id="envelope">
+          <div class="envelope">
+            <div class="envelope-flap"></div>
+            <div class="envelope-base"></div>
+            <div class="envelope-left"></div>
+            <div class="envelope-right"></div>
 
-              <div class="envelope-flap">
-                <div class="envelope-flap-shape"></div>
-                <div class="envelope-seal"></div>
-              </div>
-
-              <div class="letter">
-                <div class="letter-content">
-                  <h3>Hi, du.</h3>
-                  <p>
-                    Wenn du das hier liest, sitze ich irgendwo anders und denke trotzdem
-                    genau an dich. Ich vermisse dein Lachen, deine Kommentare zu allem
-                    Möglichen und dieses Gefühl, einfach neben dir zu sein.
-                  </p>
-                  <p>
-                    Die letzten Wochen auf Abstand waren nicht immer leicht, aber sie
-                    ändern nichts daran, wie wichtig du für mich bist. Du bist die Person,
-                    bei der sich selbst der normale Alltag wie etwas Besonderes anfühlt.
-                  </p>
-                  <p>
-                    Ich freue mich auf all das Kleine, das wiederkommt, wenn wir uns
-                    sehen: morgens zusammen wach werden, abends erzählen, was am Tag
-                    passiert ist, und all die Zwischenmomente, die man gar nicht
-                    richtig planen kann.
-                  </p>
-                  <p>
-                    Bis der Countdown bei null ist, fehlst du mir – aber gleichzeitig
-                    zeigt mir jeder Tag mehr, wie sehr ich dich in meinem Leben will.
-                  </p>
-                </div>
-              </div>
-
-              <div class="envelope-shadow"></div>
+            <div class="letter">
+              <p>
+                Hi du,
+              </p>
+              <p>
+                gerade sind wir nicht am selben Ort, aber du bist trotzdem
+                ständig bei mir. In Gedanken, in Gesprächen, in all den kleinen
+                Momenten zwischendurch.
+              </p>
+              <p>
+                Diese Distanz ist nur eine Phase. Was bleibt, bist du,
+                alles, was wir haben, und alles, worauf ich mich freue,
+                wenn wir uns wiedersehen.
+              </p>
+              <p>
+                Bis der Countdown bei null ist, denke ich an dich.
+              </p>
             </div>
           </div>
-        </button>
+        </div>
       </div>
-      <p class="tap-hint">Klick auf den Umschlag, um den Brief zu öffnen oder zu schließen.</p>
+
+      <div class="hint">
+        Klick auf den Umschlag, um den Brief zu öffnen oder zu schließen.
+      </div>
     </section>
-  </div>
+  </main>
 
   <script>
-    // Ziel-Datum für das Wiedersehen eintragen
-    // Beispiel: 1. April 2026 (lokale Zeit)
     const targetDate = new Date("2026-04-01T00:00:00");
 
     function updateCountdown() {
       const now = new Date();
-      const startOfToday = new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        now.getDate()
-      );
-      const startOfTarget = new Date(
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const target = new Date(
         targetDate.getFullYear(),
         targetDate.getMonth(),
         targetDate.getDate()
       );
 
-      const diffMs = startOfTarget.getTime() - startOfToday.getTime();
-      const oneDayMs = 24 * 60 * 60 * 1000;
-      let days = Math.ceil(diffMs / oneDayMs);
-
-      if (days < 0) {
-        days = 0;
-      }
-
-      const daysElement = document.getElementById("days");
-      if (daysElement) {
-        daysElement.textContent = String(days);
-      }
+      const diffMs = target - today;
+      const days = Math.max(0, Math.ceil(diffMs / (24 * 60 * 60 * 1000)));
+      document.getElementById("days").textContent = days;
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
-      updateCountdown();
+    updateCountdown();
+    setInterval(updateCountdown, 24 * 60 * 60 * 1000);
 
-      const envelopeButton = document.getElementById("envelopeButton");
-      const envelopeContainer = document.getElementById("envelopeContainer");
-
-      if (envelopeButton && envelopeContainer) {
-        envelopeButton.addEventListener("click", function () {
-          const isOpen = envelopeContainer.classList.toggle("open");
-          envelopeButton.setAttribute("aria-expanded", isOpen ? "true" : "false");
-        });
-      }
-
-      const oneDayMs = 24 * 60 * 60 * 1000;
-      setInterval(updateCountdown, oneDayMs);
+    document.getElementById("envelope").addEventListener("click", () => {
+      document.getElementById("envelope").classList.toggle("open");
     });
   </script>
 </body>
