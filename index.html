@@ -14,7 +14,10 @@
       --col-bg: #3D2C58;
       --col-text: #FDF4FF;
       --col-card: #432A60;
-      --col-card-soft: #4f325f;
+      --col-surface: #352147;
+      --col-envelope-paper: #fdf7ef;
+      --col-envelope-shadow: #e0d5c5;
+      --col-letter-text: #2f2540;
     }
 
     * {
@@ -25,7 +28,7 @@
 
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, var(--col-soft-pink) 0, var(--col-bg) 45%);
+      background-color: var(--col-bg);
       color: var(--col-text);
       min-height: 100vh;
       display: flex;
@@ -47,105 +50,98 @@
     }
 
     .hero {
-      background: linear-gradient(135deg, var(--col-vivid-purple), var(--col-soft-pink));
-      border-radius: 24px;
-      padding: 32px 24px;
+      background-color: var(--col-vivid-purple);
+      border-radius: 8px;
+      padding: 24px 20px;
       text-align: center;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.45);
       position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      border-radius: 999px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent 60%);
-      top: -80px;
-      right: -80px;
-      opacity: 0.7;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 160px;
-      height: 160px;
-      border-radius: 999px;
-      border: 2px solid rgba(255, 255, 255, 0.35);
-      bottom: -60px;
-      left: -40px;
-      transform: rotate(-12deg);
-      opacity: 0.8;
     }
 
     .hero h1 {
-      font-size: clamp(2.2rem, 4vw, 3rem);
+      font-size: clamp(2.1rem, 4vw, 2.8rem);
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .hero .subtitle {
-      font-size: 0.98rem;
+      font-size: 1rem;
       max-width: 520px;
       margin: 0 auto;
       opacity: 0.95;
     }
 
     .hero .tagline {
-      margin-top: 14px;
+      margin-top: 10px;
       font-size: 0.85rem;
       text-transform: uppercase;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.12em;
+      opacity: 0.8;
+    }
+
+    .hero .accent-dot {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background-color: var(--col-soft-pink);
+      top: 16px;
+      right: 16px;
+    }
+
+    .hero .accent-line {
+      position: absolute;
+      width: 46px;
+      height: 2px;
+      background-color: var(--col-soft-pink);
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
       opacity: 0.8;
     }
 
     .countdown-section {
-      margin-top: 32px;
-      background: rgba(32, 14, 54, 0.85);
-      border-radius: 24px;
-      padding: 24px 18px 26px;
-      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      margin-top: 24px;
+      background-color: var(--col-surface);
+      border-radius: 8px;
+      padding: 18px 16px 20px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       text-align: center;
-      backdrop-filter: blur(10px);
     }
 
     @media (min-width: 768px) {
       .countdown-section {
-        padding: 28px 40px 30px;
+        padding: 22px 30px 24px;
       }
     }
 
     .countdown-section h2 {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 500;
-      margin-bottom: 12px;
-      opacity: 0.9;
+      margin-bottom: 10px;
+      opacity: 0.95;
     }
 
     .countdown {
       display: flex;
       justify-content: center;
-      gap: 18px;
       margin-top: 4px;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
 
     .countdown-card {
-      background: linear-gradient(145deg, var(--col-card), var(--col-card-soft));
-      border-radius: 20px;
-      padding: 18px 26px;
-      min-width: 120px;
+      background-color: var(--col-card);
+      border-radius: 8px;
+      padding: 16px 26px;
+      min-width: 130px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .countdown-card span:first-child {
@@ -156,32 +152,33 @@
 
     .countdown-card .label {
       margin-top: 4px;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      opacity: 0.8;
+      opacity: 0.85;
     }
 
     .countdown-caption {
       font-size: 0.95rem;
       opacity: 0.9;
+      margin-top: 4px;
     }
 
     .letter-section {
-      margin-top: 32px;
+      margin-top: 28px;
       text-align: center;
     }
 
     .letter-section h2 {
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       font-weight: 500;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .envelope-wrapper {
       display: flex;
       justify-content: center;
-      margin-top: 8px;
+      margin-top: 6px;
     }
 
     .envelope-button {
@@ -193,70 +190,118 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    .envelope-button:focus-visible .envelope {
+    .envelope-button:focus-visible .envelope-container {
       box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.6);
+    }
+
+    .envelope-container {
+      position: relative;
+      width: min(420px, 90vw);
+      height: calc(min(420px, 90vw) * 0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease-out;
+    }
+
+    .envelope-button:hover .envelope-container {
+      transform: translateY(-2px);
     }
 
     .envelope {
       position: relative;
-      width: min(320px, 80vw);
-      height: calc(min(320px, 80vw) * 0.68);
-      border-radius: 18px;
-      background: linear-gradient(145deg, #fdf7ff, #f2e6ff);
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5);
-      overflow: hidden;
-      transform-origin: center;
-      transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+      width: 100%;
+      height: 100%;
     }
 
-    .envelope-button:hover .envelope {
-      transform: translateY(-2px) scale(1.01);
-      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.6);
-    }
-
-    .envelope-back {
+    .envelope-body {
       position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, var(--col-soft-pink), var(--col-vivid-purple));
+      inset: 18% 6% 8%;
+      background-color: var(--col-envelope-paper);
+      border-radius: 4px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+      overflow: hidden;
+    }
+
+    .envelope-bottom {
+      position: absolute;
+      bottom: 8%;
+      left: 6%;
+      right: 6%;
+      height: 32%;
+      background-color: var(--col-envelope-paper);
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+      clip-path: polygon(0 0, 50% 76%, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .envelope-side-left {
+      position: absolute;
+      top: 18%;
+      bottom: 8%;
+      left: 6%;
+      width: 30%;
+      background-color: var(--col-envelope-paper);
+      clip-path: polygon(0 0, 100% 50%, 0 100%);
+      box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.05);
+    }
+
+    .envelope-side-right {
+      position: absolute;
+      top: 18%;
+      bottom: 8%;
+      right: 6%;
+      width: 30%;
+      background-color: var(--col-envelope-paper);
+      clip-path: polygon(100% 0, 0 50%, 100% 100%);
+      box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.05);
     }
 
     .envelope-flap {
       position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 120%;
-      height: 100%;
-      pointer-events: none;
+      top: 4%;
+      left: 6%;
+      right: 6%;
+      height: 40%;
       transform-origin: top center;
-      transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+      transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
     }
 
-    .envelope-flap::before {
-      content: "";
+    .envelope-flap-shape {
       position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 0;
-      border-left: 50% solid transparent;
-      border-right: 50% solid transparent;
-      border-bottom: 70% solid #f9e5ff;
+      inset: 0;
+      background-color: var(--col-envelope-paper);
+      clip-path: polygon(0 0, 50% 80%, 100% 0, 100% 8%, 50% 88%, 0 8%);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
     }
 
-    .envelope-flap::after {
-      content: "";
+    .envelope-seal {
       position: absolute;
-      top: 12%;
+      top: 68%;
       left: 50%;
       transform: translateX(-50%);
-      width: 42px;
-      height: 26px;
+      width: 32px;
+      height: 32px;
       border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #ffffff, #f5bfd9);
-      box-shadow: 0 0 0 1px rgba(121, 52, 68, 0.15);
-      opacity: 0.9;
+      background-color: var(--col-soft-pink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .envelope-seal::before {
+      content: "♥";
+      font-size: 0.9rem;
+      color: white;
+    }
+
+    .envelope-shadow {
+      position: absolute;
+      inset: auto 12% -6%;
+      height: 12px;
+      border-radius: 999px;
+      background-color: rgba(0, 0, 0, 0.5);
+      filter: blur(8px);
     }
 
     .letter {
@@ -264,63 +309,55 @@
       left: 50%;
       bottom: 8%;
       transform: translateX(-50%);
-      width: 86%;
-      height: 76%;
-      background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.3);
-      padding: 16px 18px 18px;
+      width: 88%;
+      height: 82%;
+      background-color: #ffffff;
+      border-radius: 6px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+      padding: 18px 20px 20px;
       overflow: hidden;
       transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.45s ease-out;
       transform-origin: bottom center;
     }
 
-    .letter::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(197, 114, 170, 0.12), transparent 45%);
-      pointer-events: none;
-    }
-
     .letter-content {
       position: relative;
       text-align: left;
-      color: #3d2c58;
-      font-size: 0.9rem;
-      line-height: 1.5;
+      color: var(--col-letter-text);
+      font-size: 1rem;
+      line-height: 1.6;
       max-height: 100%;
       overflow-y: auto;
     }
 
     .letter-content h3 {
-      font-size: 1rem;
-      margin-bottom: 8px;
+      font-size: 1.05rem;
+      margin-bottom: 10px;
       color: var(--col-deep-purple);
     }
 
     .letter-content p + p {
-      margin-top: 6px;
-    }
-
-    .tap-hint {
-      font-size: 0.85rem;
       margin-top: 10px;
-      opacity: 0.85;
     }
 
-    .envelope:not(.open) .letter {
-      transform: translate(-50%, 26%);
-      opacity: 0.0;
+    .envelope-container:not(.open) .letter {
+      transform: translate(-50%, 38%);
+      opacity: 0;
     }
 
-    .envelope.open .letter {
+    .envelope-container.open .letter {
       transform: translate(-50%, -4%);
       opacity: 1;
     }
 
-    .envelope.open .envelope-flap {
-      transform: translateX(-50%) rotateX(165deg);
+    .envelope-container.open .envelope-flap {
+      transform: rotateX(165deg);
+    }
+
+    .tap-hint {
+      font-size: 0.9rem;
+      margin-top: 10px;
+      opacity: 0.85;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -335,11 +372,13 @@
 <body>
   <div class="page">
     <header class="hero">
+      <div class="accent-dot"></div>
+      <div class="accent-line"></div>
       <h1>Happy Valentine&apos;s Day</h1>
       <p class="subtitle">
         Auch wenn wir gerade nicht am selben Ort sind, gehört dieser Tag nur dir.
       </p>
-      <p class="tagline">Seit kurzem auf Distance, aber nicht im Kopf.</p>
+      <p class="tagline">Distance im Alltag, nicht im Herzen.</p>
     </header>
 
     <section class="countdown-section">
@@ -365,33 +404,45 @@
           aria-label="Brief öffnen"
           aria-expanded="false"
         >
-          <div class="envelope" id="envelope">
-            <div class="envelope-back"></div>
-            <div class="envelope-flap"></div>
+          <div class="envelope-container" id="envelopeContainer">
+            <div class="envelope">
+              <div class="envelope-body"></div>
+              <div class="envelope-side-left"></div>
+              <div class="envelope-side-right"></div>
+              <div class="envelope-bottom"></div>
 
-            <div class="letter">
-              <div class="letter-content">
-                <h3>Hi, du.</h3>
-                <p>
-                  Wenn du das hier liest, fehlt mir gerade ziemlich viel: dein Lachen,
-                  deine Art zu erzählen, dein Gesicht, wenn du müde bist und trotzdem
-                  noch kurz reden willst.
-                </p>
-                <p>
-                  Die Distanz fühlt sich manchmal groß an, aber egal wie weit
-                  wir gerade auseinander sind: du bist die Person, an die ich morgens
-                  zuerst und abends zuletzt denke.
-                </p>
-                <p>
-                  Ich freue mich auf alles, was wieder normal wird, wenn
-                  wir uns sehen: kleine Routinen, spontane Umarmungen, einfach
-                  neben dir sitzen und nichts Großes tun.
-                </p>
-                <p>
-                  Bis dahin zählt dieser Countdown runter, aber ich zähle innerlich
-                  genauso mit.
-                </p>
+              <div class="envelope-flap">
+                <div class="envelope-flap-shape"></div>
+                <div class="envelope-seal"></div>
               </div>
+
+              <div class="letter">
+                <div class="letter-content">
+                  <h3>Hi, du.</h3>
+                  <p>
+                    Wenn du das hier liest, sitze ich irgendwo anders und denke trotzdem
+                    genau an dich. Ich vermisse dein Lachen, deine Kommentare zu allem
+                    Möglichen und dieses Gefühl, einfach neben dir zu sein.
+                  </p>
+                  <p>
+                    Die letzten Wochen auf Abstand waren nicht immer leicht, aber sie
+                    ändern nichts daran, wie wichtig du für mich bist. Du bist die Person,
+                    bei der sich selbst der normale Alltag wie etwas Besonderes anfühlt.
+                  </p>
+                  <p>
+                    Ich freue mich auf all das Kleine, das wiederkommt, wenn wir uns
+                    sehen: morgens zusammen wach werden, abends erzählen, was am Tag
+                    passiert ist, und all die Zwischenmomente, die man gar nicht
+                    richtig planen kann.
+                  </p>
+                  <p>
+                    Bis der Countdown bei null ist, fehlst du mir – aber gleichzeitig
+                    zeigt mir jeder Tag mehr, wie sehr ich dich in meinem Leben will.
+                  </p>
+                </div>
+              </div>
+
+              <div class="envelope-shadow"></div>
             </div>
           </div>
         </button>
@@ -434,20 +485,21 @@
 
     document.addEventListener("DOMContentLoaded", function () {
       updateCountdown();
-      const envelopeButton = document.getElementById("envelopeButton");
-      const envelope = document.getElementById("envelope");
 
-      if (envelopeButton && envelope) {
+      const envelopeButton = document.getElementById("envelopeButton");
+      const envelopeContainer = document.getElementById("envelopeContainer");
+
+      if (envelopeButton && envelopeContainer) {
         envelopeButton.addEventListener("click", function () {
-          const isOpen = envelope.classList.toggle("open");
+          const isOpen = envelopeContainer.classList.toggle("open");
           envelopeButton.setAttribute("aria-expanded", isOpen ? "true" : "false");
         });
       }
 
-      // Optional: Countdown einmal pro Tag aktualisieren
       const oneDayMs = 24 * 60 * 60 * 1000;
       setInterval(updateCountdown, oneDayMs);
     });
   </script>
 </body>
 </html>
+
