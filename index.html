@@ -4,19 +4,17 @@
   <meta charset="UTF-8" />
   <title>Happy Valentine’s Day</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- „Coolere“ Schrift -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap">
 
   <style>
     :root {
-      /* Deine Basis-Palette */
+      /* Deine Palette + rotlastige Ableitungen */
       --col-deep-red: #793444;
       --col-soft-pink: #C572AA;
       --col-deep-purple: #3D2C58;
       --col-vivid-purple: #9839AC;
 
-      /* Abgeleitete, rotlastigere Farben */
-      --bg: #1f1419;
+      --bg: #211018;
       --shell-bg: #fbe1ea;
       --tile-pink-primary: #fbd0da;
       --tile-pink-strong: #f8b4c3;
@@ -34,7 +32,7 @@
 
     body {
       font-family: "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #3D2C58 0, var(--bg) 45%);
+      background-color: var(--bg);
       color: var(--text-dark);
       min-height: 100vh;
     }
@@ -70,7 +68,7 @@
       }
     }
 
-    /* ---------- Header ---------- */
+    /* Header */
 
     .header {
       display: flex;
@@ -100,7 +98,7 @@
       }
     }
 
-    /* ---------- Grid ---------- */
+    /* Grid */
 
     .grid {
       display: grid;
@@ -159,7 +157,7 @@
       margin-bottom: 8px;
     }
 
-    /* ---------- Hero ---------- */
+    /* Hero */
 
     .tile-hero {
       grid-area: hero;
@@ -194,7 +192,7 @@
       opacity: 0.9;
     }
 
-    /* ---------- Countdown ---------- */
+    /* Countdown */
 
     .tile-countdown {
       grid-area: countdown;
@@ -218,7 +216,7 @@
       color: var(--text-soft);
     }
 
-    /* ---------- Photo Tiles ---------- */
+    /* Photo-Tiles */
 
     .tile-photo-main {
       grid-area: photo-main;
@@ -259,7 +257,7 @@
       color: var(--text-soft);
     }
 
-    /* ---------- TODO ---------- */
+    /* TODO */
 
     .tile-todo {
       grid-area: todo;
@@ -310,7 +308,7 @@
       text-decoration: line-through;
     }
 
-    /* ---------- Letter Tile ---------- */
+    /* Brief-Kachel */
 
     .tile-letter {
       grid-area: letter;
@@ -362,22 +360,20 @@
       overflow: hidden;
     }
 
-    /* Unterer Teil (Dreieck nach unten) */
     .envelope-icon::before {
       content: "";
       position: absolute;
-      inset: 40% 0 0;
+      inset: 48% 0 0;
       background: #ffd8e1;
       clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
     }
 
-    /* Klappe oben */
     .envelope-icon::after {
       content: "";
       position: absolute;
       inset: 0;
       background: #ffc1d0;
-      clip-path: polygon(0 0, 50% 57%, 100% 0, 100% 30%, 50% 82%, 0 30%);
+      clip-path: polygon(0 0, 50% 60%, 100% 0, 100% 30%, 50% 85%, 0 30%);
     }
 
     .letter-subline {
@@ -386,12 +382,12 @@
       color: var(--text-soft);
     }
 
-    /* ---------- Letter Overlay (Popup) ---------- */
+    /* Popup-Brief */
 
     .letter-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.65);
+      background: rgba(0, 0, 0, 0.7);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -490,7 +486,7 @@
             </p>
           </div>
           <div class="tile-hero-foot">
-            wir &middot; heute &middot; nur anders
+            wir · heute · nur anders
           </div>
         </article>
 
@@ -505,7 +501,6 @@
         <article class="tile tile-photo-main">
           <h2>Lieblingsmoment</h2>
           <div class="photo-frame">
-            <!-- Bild ersetzen -->
             <img src="photo-main.jpg" alt="Ein Foto von uns" />
           </div>
           <div class="photo-caption">
@@ -517,7 +512,6 @@
         <article class="tile tile-photo-side">
           <h2>Letztes Treffen</h2>
           <div class="photo-frame">
-            <!-- Bild ersetzen -->
             <img src="photo-side.jpg" alt="Unser letztes Treffen" />
           </div>
           <div class="photo-caption">
@@ -529,7 +523,6 @@
         <article class="tile tile-photo-extra">
           <h2>Future Us</h2>
           <div class="photo-frame">
-            <!-- Bild ersetzen -->
             <img src="photo-future.jpg" alt="Ein Ort für uns" />
           </div>
           <div class="photo-caption">
@@ -568,9 +561,6 @@
           </div>
 
           <div class="envelope-visual" id="envelopeVisual">
-            <!-- Wenn du lieber ein Bild nehmen willst:
-                 <img src="envelope.png" alt="Umschlag" style="width:100%;height:auto;border-radius:14px;" />
-            -->
             <div class="envelope-icon"></div>
           </div>
 
@@ -622,7 +612,7 @@
   </div>
 
   <script>
-    // -------- Countdown --------
+    // Countdown
     const targetDate = new Date("2026-04-01T00:00:00"); // hier euer Wiedersehensdatum setzen
 
     function updateCountdown() {
@@ -645,7 +635,7 @@
     updateCountdown();
     setInterval(updateCountdown, 24 * 60 * 60 * 1000);
 
-    // -------- TODO Interaction --------
+    // TODO-Liste
     const todoList = document.getElementById("todoList");
     if (todoList) {
       todoList.addEventListener("click", (e) => {
@@ -655,7 +645,7 @@
       });
     }
 
-    // -------- Letter Overlay / Popup --------
+    // Brief-Popup
     const letterOverlay = document.getElementById("letterOverlay");
     const envelopeVisual = document.getElementById("envelopeVisual");
     const letterOpenText = document.getElementById("letterOpenText");
@@ -688,4 +678,3 @@
   </script>
 </body>
 </html>
-
