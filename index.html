@@ -2,20 +2,26 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <title>Happy Valentines Day</title>
+  <title>Happy Valentine’s Day</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
     :root {
-      --bg: #3D2C58;
-      --accent: #9839AC;
-      --accent-soft: #C572AA;
-      --accent-dark: #793444;
+      /* deine Palette */
+      --col-deep-red: #793444;
+      --col-soft-pink: #C572AA;
+      --col-deep-purple: #3D2C58;
+      --col-vivid-purple: #9839AC;
 
-      --paper: #fdf6ec;
-      --paper-border: rgba(0, 0, 0, 0.18);
-      --text-light: #f7f3ff;
-      --text-dark: #2f2540;
+      /* abgeleitete Farben */
+      --bg: #2a203b;
+      --shell-bg: #fbe9f4;
+      --tile-pink: #fbd6ea;
+      --tile-pink-strong: #f7bfdc;
+      --tile-purple-soft: #efe4ff;
+      --tile-outline: rgba(0,0,0,0.06);
+      --text-dark: #241621;
+      --text-soft: #4b3c4b;
     }
 
     * {
@@ -26,231 +32,514 @@
 
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background-color: var(--bg);
-      color: var(--text-light);
+      background: var(--bg);
+      color: var(--text-dark);
+      min-height: 100vh;
     }
 
     main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 60px 16px 120px;
+      max-width: 1180px;
+      margin: 40px auto 80px;
+      padding: 24px 16px;
     }
 
-    section {
-      margin: 100px 0;
+    .shell {
+      background: var(--shell-bg);
+      border-radius: 28px;
+      padding: 24px 24px 28px;
+      border: 1px solid rgba(255,255,255,0.6);
+      box-shadow: 0 22px 60px rgba(0,0,0,0.45);
     }
 
-    /* ---------- Banner ---------- */
+    /* ---------- Header ---------- */
 
-    .hero {
-      text-align: center;
-      margin-bottom: 140px;
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+      gap: 12px;
     }
 
-    .hero h1 {
-      font-size: clamp(2.6rem, 6vw, 4rem);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .hero p {
+    .header-title {
       font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--col-deep-red);
+    }
+
+    .header-date {
+      font-size: 0.95rem;
+      color: var(--text-soft);
       opacity: 0.9;
     }
 
-    /* ---------- Countdown ---------- */
+    /* ---------- Grid ---------- */
 
-    .countdown {
-      text-align: center;
+    .grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1.2fr 1.2fr;
+      grid-auto-rows: minmax(170px, auto);
+      gap: 18px;
+      grid-template-areas:
+        "hero hero photo-main"
+        "countdown photo-side todo"
+        "letter photo-side photo-extra";
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "hero hero"
+          "photo-main photo-main"
+          "countdown todo"
+          "photo-side photo-extra"
+          "letter letter";
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        border-radius: 0;
+        padding: 16px 16px 24px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        grid-template-areas:
+          "hero"
+          "countdown"
+          "photo-main"
+          "todo"
+          "photo-side"
+          "photo-extra"
+          "letter";
+      }
+
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .tile {
+      border-radius: 22px;
+      padding: 20px 20px;
+      border: 1px solid var(--tile-outline);
+      background: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .tile h2 {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+    }
+
+    /* ---------- Hero Tile ---------- */
+
+    .tile-hero {
+      grid-area: hero;
+      background: var(--tile-pink);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .tile-hero-main {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      line-height: 1.2;
+      font-weight: 650;
+      color: var(--text-dark);
+    }
+
+    .tile-hero-main em {
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .tile-hero-sub {
+      margin-top: 14px;
+      font-size: 0.98rem;
+      color: var(--text-soft);
+      max-width: 420px;
+    }
+
+    .tile-hero-foot {
+      margin-top: 18px;
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--col-deep-red);
+      opacity: 0.9;
+    }
+
+    /* ---------- Countdown Tile ---------- */
+
+    .tile-countdown {
+      grid-area: countdown;
+      background: #ffffff;
     }
 
     .countdown-number {
-      font-size: clamp(5.5rem, 14vw, 9.5rem);
+      font-size: clamp(3.5rem, 7vw, 5rem);
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.16em;
       line-height: 1;
+      color: var(--col-deep-purple);
+      margin-top: 10px;
     }
 
     .countdown-label {
-      margin-top: 14px;
-      font-size: 1.15rem;
-      letter-spacing: 0.22em;
+      margin-top: 10px;
+      font-size: 0.95rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      opacity: 0.85;
+      color: var(--text-soft);
     }
 
-    /* ---------- Brief ---------- */
-
-    .letter-section {
-      text-align: center;
+    .countdown-note {
+      margin-top: 14px;
+      font-size: 0.9rem;
+      color: var(--text-soft);
     }
 
-    .letter-section h2 {
-      font-size: 1.6rem;
-      font-weight: 500;
-      margin-bottom: 40px;
+    /* ---------- Photo Tiles ---------- */
+
+    .tile-photo-main {
+      grid-area: photo-main;
+      background: var(--tile-pink-strong);
+      padding: 18px;
     }
 
-    .envelope-wrapper {
-      display: flex;
-      justify-content: center;
+    .tile-photo-side {
+      grid-area: photo-side;
+      background: var(--tile-purple-soft);
+      padding: 18px;
     }
 
-    .envelope-container {
+    .tile-photo-extra {
+      grid-area: photo-extra;
+      background: var(--tile-pink);
+      padding: 18px;
+    }
+
+    .photo-frame {
       position: relative;
-      width: min(760px, 96vw);
-      height: 440px;
+      width: 100%;
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(0,0,0,0.08);
+      aspect-ratio: 16 / 9;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-caption {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    /* ---------- TODO Tile ---------- */
+
+    .tile-todo {
+      grid-area: todo;
+      background: #ffffff;
+    }
+
+    .todo-list {
+      list-style: none;
+      margin-top: 10px;
+    }
+
+    .todo-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 8px 0;
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .todo-checkbox {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1px solid var(--col-vivid-purple);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .todo-checkbox span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: transparent;
+      transition: background 0.18s ease;
+    }
+
+    .todo-item.done .todo-checkbox span {
+      background: var(--col-vivid-purple);
+    }
+
+    .todo-item.done {
+      color: rgba(75, 60, 75, 0.55);
+      text-decoration: line-through;
+    }
+
+    /* ---------- Letter Tile ---------- */
+
+    .tile-letter {
+      grid-area: letter;
+      background: var(--tile-purple-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .letter-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .letter-toggle {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--col-vivid-purple);
       cursor: pointer;
     }
 
-    .envelope {
+    .envelope-visual {
+      margin-top: 8px;
+      margin-bottom: 12px;
+      border-radius: 18px;
+      background: var(--paper);
+      border: 1px solid var(--tile-outline);
+      padding: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .envelope-icon {
+      position: relative;
+      width: 140px;
+      height: 90px;
+      background: white;
+      border: 1px solid rgba(0,0,0,0.16);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .envelope-icon::before {
+      /* Klappe */
+      content: "";
       position: absolute;
       inset: 0;
+      background: var(--tile-pink);
+      clip-path: polygon(0 0, 50% 60%, 100% 0, 100% 10%, 50% 70%, 0 10%);
     }
 
-    .envelope-base {
+    .envelope-icon::after {
+      content: "";
       position: absolute;
-      inset: 90px 0 0;
-      background: var(--paper);
-      border: 1px solid var(--paper-border);
+      inset: 0;
+      background:
+        linear-gradient(to bottom right, transparent 49%, rgba(0,0,0,0.06) 50%, transparent 51%),
+        linear-gradient(to bottom left, transparent 49%, rgba(0,0,0,0.06) 50%, transparent 51%);
+      opacity: 0.7;
     }
 
-    .envelope-left {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 50%;
-      height: calc(100% - 90px);
-      background: var(--paper);
-      clip-path: polygon(0 0, 100% 50%, 0 100%);
-      border-left: 1px solid var(--paper-border);
-    }
-
-    .envelope-right {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      width: 50%;
-      height: calc(100% - 90px);
-      background: var(--paper);
-      clip-path: polygon(100% 0, 0 50%, 100% 100%);
-      border-right: 1px solid var(--paper-border);
-    }
-
-    .envelope-flap {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 180px;
-      background: var(--paper);
-      clip-path: polygon(0 0, 50% 100%, 100% 0);
-      transform-origin: top center;
-      transition: transform 0.5s ease;
-      border-top: 1px solid var(--paper-border);
-    }
-
-    .letter {
-      position: absolute;
-      left: 50%;
-      bottom: 20px;
-      transform: translateX(-50%);
-      width: 92%;
-      height: 86%;
+    .letter-body {
+      margin-top: 4px;
       background: white;
-      border: 1px solid var(--paper-border);
-      padding: 44px 56px;
+      border-radius: 16px;
+      border: 1px solid rgba(0,0,0,0.12);
+      padding: 16px 18px;
+      font-size: 0.98rem;
+      line-height: 1.6;
       color: var(--text-dark);
-      font-size: 1.05rem;
-      line-height: 1.65;
-      opacity: 0;
-      transition: transform 0.5s ease, opacity 0.4s ease;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.28s ease;
     }
 
-    .letter p + p {
-      margin-top: 16px;
+    .tile-letter.open .letter-body {
+      max-height: 260px; /* genug für den Text */
     }
 
-    .envelope-container.open .letter {
-      transform: translateX(-50%) translateY(-160px);
-      opacity: 1;
+    .letter-body p + p {
+      margin-top: 10px;
     }
 
-    .envelope-container.open .envelope-flap {
-      transform: rotateX(180deg);
-    }
-
-    .hint {
-      margin-top: 24px;
-      font-size: 0.95rem;
-      opacity: 0.8;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        transition: none !important;
-      }
+    .letter-hint {
+      margin-top: 8px;
+      font-size: 0.86rem;
+      color: var(--text-soft);
     }
   </style>
 </head>
 
 <body>
   <main>
-    <section class="hero">
-      <h1>Happy Valentine’s Day</h1>
-      <p>
-        Auch wenn wir gerade nicht am selben Ort sind.
-      </p>
-    </section>
+    <div class="shell">
+      <header class="header">
+        <div class="header-title">Happy Valentine’s Day</div>
+        <div class="header-date">2026 – irgendwo zwischen dir und mir</div>
+      </header>
 
-    <section class="countdown">
-      <div class="countdown-number" id="days">0</div>
-      <div class="countdown-label">
-        Tage bis wir uns wiedersehen
-      </div>
-    </section>
+      <section class="grid">
+        <!-- Hero-Kachel -->
+        <article class="tile tile-hero">
+          <div>
+            <div class="tile-hero-main">
+              Auch mit Abstand bist du <em>mein</em> Lieblings-Mensch.
+            </div>
+            <p class="tile-hero-sub">
+              Zwei Monate Long-Distance sind keine Ewigkeit, aber lang genug,
+              um zu merken, wie sehr du mir im Alltag fehlst.
+            </p>
+          </div>
+          <div class="tile-hero-foot">
+            Wir – heute, nur anders.
+          </div>
+        </article>
 
-    <section class="letter-section">
-      <h2>Ein Brief nur für dich</h2>
+        <!-- Countdown -->
+        <article class="tile tile-countdown">
+          <h2>Countdown</h2>
+          <div class="countdown-number" id="days">0</div>
+          <div class="countdown-label">Tage bis wir uns wiedersehen</div>
+          <p class="countdown-note">
+            Jeder Tag weniger ist ein Schritt zurück zu Zugfahrten,
+            Umarmungen und Kaffee nicht mehr nur über Video.
+          </p>
+        </article>
 
-      <div class="envelope-wrapper">
-        <div class="envelope-container" id="envelope">
-          <div class="envelope">
-            <div class="envelope-flap"></div>
-            <div class="envelope-base"></div>
-            <div class="envelope-left"></div>
-            <div class="envelope-right"></div>
+        <!-- Hauptfoto -->
+        <article class="tile tile-photo-main">
+          <h2>Du</h2>
+          <div class="photo-frame">
+            <!-- Bild ersetzen -->
+            <img src="photo-main.jpg" alt="Ein Foto von uns" />
+          </div>
+          <div class="photo-caption">
+            Ersetze dieses Bild mit einem Lieblingsmoment von uns.
+          </div>
+        </article>
 
-            <div class="letter">
-              <p>
-                Hi du,
-              </p>
-              <p>
-                gerade sind wir nicht am selben Ort, aber du bist trotzdem
-                ständig bei mir. In Gedanken, in Gesprächen, in all den kleinen
-                Momenten zwischendurch.
-              </p>
-              <p>
-                Diese Distanz ist nur eine Phase. Was bleibt, bist du,
-                alles, was wir haben, und alles, worauf ich mich freue,
-                wenn wir uns wiedersehen.
-              </p>
-              <p>
-                Bis der Countdown bei null ist, denke ich an dich.
-              </p>
+        <!-- Seitenfoto -->
+        <article class="tile tile-photo-side">
+          <h2>Ein Moment</h2>
+          <div class="photo-frame">
+            <!-- Bild ersetzen -->
+            <img src="photo-side.jpg" alt="Ein besonderer Moment" />
+          </div>
+          <div class="photo-caption">
+            Vielleicht das letzte Treffen vor der Distanz.
+          </div>
+        </article>
+
+        <!-- Extra-Foto -->
+        <article class="tile tile-photo-extra">
+          <h2>Future Us</h2>
+          <div class="photo-frame">
+            <!-- Bild ersetzen -->
+            <img src="photo-future.jpg" alt="Ein Ort, an den ihr wollt" />
+          </div>
+          <div class="photo-caption">
+            Ein Ort, an den wir zusammen wollen, wenn das hier vorbei ist.
+          </div>
+        </article>
+
+        <!-- TODO-Liste -->
+        <article class="tile tile-todo">
+          <h2>Wenn wir uns wiedersehen</h2>
+          <ul class="todo-list" id="todoList">
+            <li class="todo-item">
+              <div class="todo-checkbox"><span></span></div>
+              <span>Erstes richtig langes Frühstück zusammen</span>
+            </li>
+            <li class="todo-item">
+              <div class="todo-checkbox"><span></span></div>
+              <span>Spaziergang ohne Uhr im Kopf</span>
+            </li>
+            <li class="todo-item">
+              <div class="todo-checkbox"><span></span></div>
+              <span>Filmabend, den wir schon ewig planen</span>
+            </li>
+            <li class="todo-item">
+              <div class="todo-checkbox"><span></span></div>
+              <span>Einfach nichts tun und nur da sein</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Brief-Kachel -->
+        <article class="tile tile-letter" id="letterTile">
+          <div class="letter-top">
+            <h2>Ein Brief für dich</h2>
+            <div class="letter-toggle" id="letterToggle">
+              öffnen
             </div>
           </div>
-        </div>
-      </div>
 
-      <div class="hint">
-        Klick auf den Umschlag, um den Brief zu öffnen oder zu schließen.
-      </div>
-    </section>
+          <div class="envelope-visual" id="envelopeVisual">
+            <!-- Wenn du lieber ein Bild nutzen willst:
+                 <img src="envelope.png" alt="Umschlag" style="width:100%;height:auto;border-radius:12px;" />
+            -->
+            <div class="envelope-icon"></div>
+          </div>
+
+          <div class="letter-body">
+            <p>
+              Hi du,
+            </p>
+            <p>
+              auch wenn wir gerade an zwei verschiedenen Orten sind, fühlt
+              sich vieles durch dich immer noch wie „zu Hause“ an – Nachrichten,
+              Anrufe, kleine Updates zwischendurch.
+            </p>
+            <p>
+              Die Entfernung nervt manchmal, klar. Aber sie ändert nichts daran,
+              wie sehr ich dich mag und wie froh ich bin, dass es dich gibt.
+            </p>
+            <p>
+              Ich freue mich auf den Tag, an dem dieser Countdown auf 0 steht
+              und das hier wieder Alltag ist und keine Ausnahme.
+            </p>
+          </div>
+
+          <div class="letter-hint">
+            Klick auf den Umschlag oder den „öffnen“-Text, um den Brief zu sehen.
+          </div>
+        </article>
+      </section>
+    </div>
   </main>
 
   <script>
+    // ----------------- Countdown -----------------
+    // Hier dein Wiedersehensdatum eintragen
     const targetDate = new Date("2026-04-01T00:00:00");
 
     function updateCountdown() {
@@ -263,17 +552,46 @@
       );
 
       const diffMs = target - today;
-      const days = Math.max(0, Math.ceil(diffMs / (24 * 60 * 60 * 1000)));
-      document.getElementById("days").textContent = days;
+      const oneDayMs = 24 * 60 * 60 * 1000;
+      const days = Math.max(0, Math.ceil(diffMs / oneDayMs));
+
+      const daysEl = document.getElementById("days");
+      if (daysEl) daysEl.textContent = String(days);
     }
 
     updateCountdown();
+    // einmal am Tag aktualisieren
     setInterval(updateCountdown, 24 * 60 * 60 * 1000);
 
-    document.getElementById("envelope").addEventListener("click", () => {
-      document.getElementById("envelope").classList.toggle("open");
-    });
+    // ----------------- TODO Interaction -----------------
+    const todoList = document.getElementById("todoList");
+    if (todoList) {
+      todoList.addEventListener("click", (e) => {
+        const item = e.target.closest(".todo-item");
+        if (!item) return;
+        item.classList.toggle("done");
+      });
+    }
+
+    // ----------------- Letter Tile -----------------
+    const letterTile = document.getElementById("letterTile");
+    const letterToggle = document.getElementById("letterToggle");
+    const envelopeVisual = document.getElementById("envelopeVisual");
+
+    function toggleLetter() {
+      if (!letterTile) return;
+      const isOpen = letterTile.classList.toggle("open");
+      if (letterToggle) {
+        letterToggle.textContent = isOpen ? "schließen" : "öffnen";
+      }
+    }
+
+    if (letterToggle) {
+      letterToggle.addEventListener("click", toggleLetter);
+    }
+    if (envelopeVisual) {
+      envelopeVisual.addEventListener("click", toggleLetter);
+    }
   </script>
 </body>
 </html>
-
