@@ -66,6 +66,8 @@
       }
     }
 
+    /* Header */
+
     .header {
       display: flex;
       justify-content: space-between;
@@ -93,6 +95,8 @@
         align-items: flex-start;
       }
     }
+
+    /* Grid */
 
     .grid {
       display: grid;
@@ -151,6 +155,8 @@
       margin-bottom: 8px;
     }
 
+    /* Hero */
+
     .tile-hero {
       grid-area: hero;
       background: var(--tile-pink-primary);
@@ -184,6 +190,8 @@
       opacity: 0.9;
     }
 
+    /* Countdown */
+
     .tile-countdown {
       grid-area: countdown;
       background: #fff;
@@ -205,6 +213,8 @@
       text-transform: uppercase;
       color: var(--text-soft);
     }
+
+    /* Photo-Tiles */
 
     .tile-photo-main {
       grid-area: photo-main;
@@ -244,6 +254,8 @@
       font-size: 0.88rem;
       color: var(--text-soft);
     }
+
+    /* TODO */
 
     .tile-todo {
       grid-area: todo;
@@ -293,6 +305,8 @@
       color: rgba(91, 55, 70, 0.55);
       text-decoration: line-through;
     }
+
+    /* Brief-Kachel */
 
     .tile-letter {
       grid-area: letter;
@@ -366,15 +380,21 @@
       color: var(--text-soft);
     }
 
+    /* Popup-Brief */
+
     .letter-overlay {
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.7);
-      display: flex;
+      display: none;              /* Start: unsichtbar */
       justify-content: center;
       align-items: center;
       padding: 16px;
       z-index: 40;
+    }
+
+    .letter-overlay.open {
+      display: flex;              /* nur mit .open sichtbar */
     }
 
     .letter-page {
@@ -435,9 +455,11 @@
         max-height: 100vh;
         padding: 22px 18px 26px;
       }
+
       .letter-page-header {
         margin-bottom: 12px;
       }
+
       .letter-page-body {
         font-size: 0.98rem;
       }
@@ -454,6 +476,7 @@
       </header>
 
       <section class="grid">
+        <!-- Hero -->
         <article class="tile tile-hero">
           <div>
             <div class="tile-hero-main">
@@ -469,22 +492,26 @@
           </div>
         </article>
 
+        <!-- Countdown -->
         <article class="tile tile-countdown">
           <h2>Countdown</h2>
           <div class="countdown-number" id="days">0</div>
           <div class="countdown-label">Tage bis wir uns wiedersehen</div>
         </article>
 
+        <!-- Oben rechts: Blumenstrauß -->
         <article class="tile tile-photo-main">
-          <h2>Lieblingsmoment</h2>
+          <h2>Blumenstrauß, der frisch bleibt</h2>
           <div class="photo-frame">
-            <img src="photo-main.jpg" alt="Ein Foto von uns" />
+            <!-- Dein Bouquet-Bild hier einfügen -->
+            <img src="bouquet.jpg" alt="Ein digitaler Blumenstrauß" />
           </div>
           <div class="photo-caption">
-            Ersetze dieses Bild mit einem Moment, der sich nach „wir“ anfühlt.
+            Kein Wasser nötig, hält für immer – aber echte Blumen gibt’s trotzdem.
           </div>
         </article>
 
+        <!-- Seitenfoto -->
         <article class="tile tile-photo-side">
           <h2>Letztes Treffen</h2>
           <div class="photo-frame">
@@ -495,6 +522,7 @@
           </div>
         </article>
 
+        <!-- Extra-Foto -->
         <article class="tile tile-photo-extra">
           <h2>Future Us</h2>
           <div class="photo-frame">
@@ -505,6 +533,7 @@
           </div>
         </article>
 
+        <!-- TODO-Liste -->
         <article class="tile tile-todo">
           <h2>Wenn wir uns wiedersehen</h2>
           <ul class="todo-list" id="todoList">
@@ -527,6 +556,7 @@
           </ul>
         </article>
 
+        <!-- Brief-Kachel -->
         <article class="tile tile-letter" id="letterTile">
           <div class="letter-top">
             <div class="letter-title">Brief</div>
@@ -545,7 +575,8 @@
     </div>
   </main>
 
-  <div class="letter-overlay" id="letterOverlay" hidden>
+  <!-- Popup-Brief (initial unsichtbar, wird per .open sichtbar) -->
+  <div class="letter-overlay" id="letterOverlay">
     <div class="letter-page" role="dialog" aria-modal="true" aria-labelledby="letterTitlePopup">
       <div class="letter-page-header">
         <div class="letter-page-title" id="letterTitlePopup">Ein Brief nur für dich</div>
@@ -580,6 +611,7 @@
   </div>
 
   <script>
+    // Countdown
     const targetDate = new Date("2026-04-01T00:00:00"); // hier euer Wiedersehensdatum setzen
 
     function updateCountdown() {
@@ -590,9 +622,11 @@
         targetDate.getMonth(),
         targetDate.getDate()
       );
+
       const diffMs = target - today;
       const oneDayMs = 24 * 60 * 60 * 1000;
       const days = Math.max(0, Math.ceil(diffMs / oneDayMs));
+
       const daysEl = document.getElementById("days");
       if (daysEl) daysEl.textContent = String(days);
     }
@@ -600,6 +634,7 @@
     updateCountdown();
     setInterval(updateCountdown, 24 * 60 * 60 * 1000);
 
+    // TODO-Liste
     const todoList = document.getElementById("todoList");
     if (todoList) {
       todoList.addEventListener("click", (e) => {
@@ -609,24 +644,29 @@
       });
     }
 
+    // Brief-Popup
     const letterOverlay = document.getElementById("letterOverlay");
     const envelopeVisual = document.getElementById("envelopeVisual");
     const letterOpenText = document.getElementById("letterOpenText");
 
+    // Standardmäßig Overlay verstecken
+    letterOverlay.classList.remove("open");
+
     function openLetter() {
       if (!letterOverlay) return;
-      letterOverlay.hidden = false;
+      letterOverlay.classList.add("open");
       document.body.classList.add("no-scroll");
     }
 
     function closeLetter() {
       if (!letterOverlay) return;
-      letterOverlay.hidden = true;
+      letterOverlay.classList.remove("open");
       document.body.classList.remove("no-scroll");
     }
 
     if (envelopeVisual) envelopeVisual.addEventListener("click", openLetter);
     if (letterOpenText) letterOpenText.addEventListener("click", openLetter);
+
     if (letterOverlay) {
       letterOverlay.addEventListener("click", (e) => {
         if (e.target === letterOverlay || e.target.closest("[data-close-letter]")) {
