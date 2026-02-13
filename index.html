@@ -67,7 +67,6 @@
     }
 
     /* Header */
-
     .header {
       display: flex;
       justify-content: space-between;
@@ -162,7 +161,6 @@
     }
 
     /* Hero */
-
     .tile-hero {
       grid-area: hero;
       background: var(--tile-pink-primary);
@@ -197,7 +195,6 @@
     }
 
     /* Countdown */
-
     .tile-countdown {
       grid-area: countdown;
       background: #fff;
@@ -221,7 +218,6 @@
     }
 
     /* Photo-Tiles */
-
     .tile-photo-main {
       grid-area: photo-main;
       background: var(--tile-pink-strong);
@@ -291,7 +287,6 @@
     }
 
     /* TODO */
-
     .tile-todo {
       grid-area: todo;
       background: #fff;
@@ -342,7 +337,6 @@
     }
 
     /* Brief-Kachel */
-
     .tile-letter {
       grid-area: letter;
       background: var(--tile-pink-soft);
@@ -434,7 +428,7 @@
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.7);
-      display: none;              /* Start: unsichtbar */
+      display: none;
       justify-content: center;
       align-items: center;
       padding: 16px;
@@ -442,7 +436,7 @@
     }
 
     .letter-overlay.open {
-      display: flex;              /* nur mit .open sichtbar */
+      display: flex;
     }
 
     .letter-page {
@@ -652,7 +646,7 @@
     </div>
   </main>
 
-  <!-- Popup-Brief (initial unsichtbar, wird per .open sichtbar) -->
+  <!-- Popup-Brief -->
   <div class="letter-overlay" id="letterOverlay">
     <div class="letter-page" role="dialog" aria-modal="true" aria-labelledby="letterTitlePopup">
       <div class="letter-page-header">
@@ -686,14 +680,14 @@
           Ich liebe alles an dir. Deine Augen, dein Lachen, dein Auftreten, deinen Humor, jedes kleine Detail deines Charakters.
         </p>
         <p>
-          Du bist mein Sonnenschein, mein Ruhepol, mein aufmerksames Ohr und selbst wenn wir uns nicht sehen werden, hoffe ich dass wir 
+          Du bist mein Ruhepol und mein aufmerksames Ohr und selbst wenn wir uns nicht sehen werden, hoffe ich dass wir 
           während des Ganzen trotzdem gut für einander da sein können. Ich freue mich schon auf unsere Facetime Calls, auf Audios und 
           kleine Nachrichten und Snaps. Ich freue mich darauf zu sehen, dass wir schöne Dinge erleben. Und ich freue mich mehr als alles andere
           darauf, dich wieder zu sehen.
         </p>
         <p>
           Und bis der Countdown oben bei null ist, machen wir eben das Beste aus zwei Orten.
-          Aber in meinem Kopf gibt es langfristig nur einen perfekten Ort: da, wo du bist.
+          Aber in meinem Kopf gibt es langfristig nur einen perfekten Ort: Da, wo du bist.
         </p>
         <p>
           Ich liebe dich Anna, für immer.
@@ -742,7 +736,6 @@
     const envelopeVisual = document.getElementById("envelopeVisual");
     const letterOpenText = document.getElementById("letterOpenText");
 
-    // Standardmäßig Overlay verstecken
     letterOverlay.classList.remove("open");
 
     function openLetter() {
